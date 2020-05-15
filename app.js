@@ -62,7 +62,7 @@ new Vue({
         this.playerHealth = 100;
       }
       this.turns.unshift({
-        isPlayer: false,
+        isPlayer: true,
         text: 'Player heals for ' + 10,
       });
       this.monsterAttacks();
