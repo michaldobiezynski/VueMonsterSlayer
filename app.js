@@ -10,19 +10,29 @@ new Vue({
       this.gameIsRunning = true;
       this.playerHealth = 100;
       this.monsterHealth = 100;
+      turns: [];
     },
     attack: function () {
       var max = 10;
       var min = 3;
-      this.monsterHealth -= this.calculateDamage(min, max);
+      var damage = this.calculateDamage(min, max);
+      this.monsterHealth -= damage;
+      this.turns.unshift({
+        isPlayer: true,
+        text: 'Player hits Monster for ' + damage,
+      });
 
       if (this.checkWin()) {
         return;
       }
-
       max = 12;
       min = 5;
-      this.playerHealth -= this.calculateDamage(min, max);
+      var damage = this.calculateDamage(min, max);
+      this.playerHealth -= damage;
+      this.turns.unshift({
+        isPlayer: false,
+        text: 'Monster hits Player for ' + damage,
+      });
 
       this.checkWin();
     },
